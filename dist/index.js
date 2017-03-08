@@ -8,7 +8,6 @@ window.onload = function() {
     e.stopPropagation();
     e.preventDefault();
     this.style.height = '100px';
-    console.log(this);
   });
 
 }
