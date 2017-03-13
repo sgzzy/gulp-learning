@@ -31,5 +31,6 @@ module.exports = {
         ],
         "no-console": "off",
         // "comma-dangle": [1, "always"],
+        "no-unused-vars": ["wraning", { "vars": "all", "args": "after-used" }]
     }
 };
