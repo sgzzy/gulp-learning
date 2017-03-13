@@ -4,11 +4,11 @@ const extractTextPlugin = require('extract-text-webpack-plugin'); // 从vue模�
 const path = require('path');
 
 module.exports = {
-  entry: './src/main.js', // 入口文件
+  entry: './src/js/main.js', // 入口文件
 
   output: { // 出口配置
     path: path.resolve(__dirname, './dist/'), // 出口文件的路径
-    filename: 'bundle.js' // 出口文件的文件名
+    filename: 'bundle.js', // 出口文件的文件名
   },
 
   module: {
@@ -28,18 +28,18 @@ module.exports = {
       // },
       {
         test: /\.html$/,
-        loader: 'html-loader'
+        loader: 'html-loader',
       },
       {
         test: /\.js$/,
         exclude: '/node_modules/',
-        use: ['babel-loader', 'eslint-loader']
+        use: ['babel-loader', 'eslint-loader',]
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'] // style为插入html的样式，css为href引入的样式
-      }
-    ]
+        loader: extractTextPlugin.extract('css-loader'), // style为插入html的样式，css为href引入的样式
+      },
+    ],
   },
 
   devtool: 'eval-source-map',
@@ -55,26 +55,26 @@ module.exports = {
 
     inline: true,
 
-    hot: true
+    hot: true,
   },
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: './index.html'
-    })
-    // new extractTextPlugin({
-    //   filename: '/style.css', // 被导出的css文件的路径及名字
-    //   allChunks: true // 从所有附加块中提取（默认只从初始块提取）
-    // })
+      template: './index.html',
+    }),
+    new extractTextPlugin({
+      filename: './style.css', // 被导出的css文件的路径及名字
+      allChunks: true, // 从所有附加块中提取（默认只从初始块提取）
+    }),
   ],
-  resolve: {
-    // require时省略的扩展名，如：require('app') 不需要app.js
-    extensions: ['.js', '.vue'],
-    // 别名，可以直接使用别名来代表设定的路径以及其他
-    // alias: {
-    //   filter: path.join(__dirname, './src/filters'),
-    //   vue$: 'vue/dist/vue.common.js',
-    //   components: path.join(__dirname, './src/components')
-    // }
-  }
+  // resolve: {
+  //   // require时省略的扩展名，如：require('app') 不需要app.js
+  //   extensions: ['.js', '.vue',],
+  //   // 别名，可以直接使用别名来代表设定的路径以及其他
+  //   // alias: {
+  //   //   filter: path.join(__dirname, './src/filters'),
+  //   //   vue$: 'vue/dist/vue.common.js',
+  //   //   components: path.join(__dirname, './src/components')
+  //   // }
+  // },
 };
