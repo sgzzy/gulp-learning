@@ -25,7 +25,7 @@ gulp.task('dev', function() {
 })
 
 gulp.task('default', function() { // 将es6规则的js文件转换为es5规则的js文件
-  gulp.src('app/js/**/*.js') // 输入指定文件
+  gulp.src( 'app/js/**/*.js') // 输入指定文件
     .pipe(babel({ presets: [es2015] })) // 将es6文件转码为es5文件
     .pipe(sourcemaps.init())
     .pipe(concat('bundle.js')) // 将所有js文件合成一个js文件
