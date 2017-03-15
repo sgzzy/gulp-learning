@@ -4,10 +4,10 @@ const extractTextPlugin = require('extract-text-webpack-plugin'); // 从vue模�
 const path = require('path');
 
 module.exports = {
-  entry: './src/js/main.js', // 入口文件
+  // entry: './app/js/main.js', // 入口文件
 
   output: { // 出口配置
-    path: path.resolve(__dirname, './dist/'), // 出口文件的路径
+    path: path.resolve(__dirname, './dist/js/'), // 出口文件的路径
     filename: 'bundle.js', // 出口文件的文件名
   },
 
@@ -26,19 +26,19 @@ module.exports = {
       //   //   }
       //   // }
       // },
-      {
-        test: /\.html$/,
-        loader: 'html-loader',
-      },
+      // {
+      //   test: /\.html$/,
+      //   loader: 'html-loader',
+      // },
       {
         test: /\.js$/,
         exclude: '/node_modules/',
         use: ['babel-loader', 'eslint-loader',]
       },
-      {
-        test: /\.css$/,
-        loader: extractTextPlugin.extract('css-loader'), // style为插入html的样式，css为href引入的样式
-      },
+      // {
+      //   test: /\.css$/,
+      //   loader: extractTextPlugin.extract('css-loader'), // style为插入html的样式，css为href引入的样式
+      // },
     ],
   },
 
@@ -51,21 +51,19 @@ module.exports = {
     // historyApiFallback用来配置页面重定向
     historyApiFallback: true,
 
-    color: true,
-
     inline: true,
 
     hot: true,
   },
 
   plugins: [
-    new HtmlWebpackPlugin({
-      template: './index.html',
-    }),
-    new extractTextPlugin({
-      filename: './style.css', // 被导出的css文件的路径及名字
-      allChunks: true, // 从所有附加块中提取（默认只从初始块提取）
-    }),
+    // new HtmlWebpackPlugin({
+    //   template: './index.html',
+    // }),
+    // new extractTextPlugin({
+    //   filename: './dist/css/style.css', // 被导出的css文件的路径及名字s
+    //   allChunks: true, // 从所有附加块中提取（默认只从初始块提取）
+    // }),
   ],
   // resolve: {
   //   // require时省略的扩展名，如：require('app') 不需要app.js
