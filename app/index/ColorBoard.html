@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../statics/product/css/base/base.css">
+    <link rel="stylesheet" href="../statics/product/css/view/other/colorBoard.css">
+    <script type="text/javascript" src="../statics/product/loader/sea.js"></script>
+    <script type="text/javascript">
+      seajs.config({ base: '../statics/product/js' });
+      seajs.use('../statics/product/js/view/other/colorBoard');
+    </script>
+  </head>
+  <body>
+    <div class="color-board">
+      <div class="color-choose"></div>
+      <div class="color-show">
+        <strong class="r" title="Red">R:</strong><input type="text" value="255">
+        <strong class="g" title="Green">G:</strong><input type="text" value="255">
+        <strong class="b" title="Blue">B:</strong><input type="text" value="255">
+        <select>
+           <option id="rgb">RGB</option>
+           <option id="hsv">HSV</option>
+        </select>
+        <strong class="hex" title="Hex">#</strong><input type="text" class="hex-value" value="FFFFFF">
+
+      </div>
+      <div id="colorBoard">
+        <img ondragstart="return false;" style="user-select: none;" src="../statics/product/images/colorBoard/HSColor360.png" width="360" height="360" draggable="false">
+        <div class="colorBox"></div>
+      </div>
+      <canvas id="lightBar" width="40" height="360" style="user-select: none;"></canvas>
+    </div>
+    <div class="show-color">
+      <input class="rgb-color" type="text" placeholder="RGB(255,255,255)">
+      <input class="hex-color" type="text" placeholder="#ffffff">
+    </div>
+  </body>
+</html>

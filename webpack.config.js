@@ -1,13 +1,13 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin'); // 自动插入生成html插件
-const extractTextPlugin = require('extract-text-webpack-plugin'); // 从vue模块中提取css插件
+// const HtmlWebpackPlugin = require('html-webpack-plugin'); // 自动插入生成html插件
+// const extractTextPlugin = require('extract-text-webpack-plugin'); // 从vue模块中提取css插件
 // const webpack = require('webpack')
 const path = require('path');
 
 module.exports = {
-  // entry: './app/js/main.js', // 入口文件
+  entry: './app/js/views/index.js', // 入口文件
 
   output: { // 出口配置
-    path: path.resolve(__dirname, './dist/js/'), // 出口文件的路径
+    path: path.resolve(__dirname, './dist/'), // 出口文件的路径
     filename: 'bundle.js', // 出口文件的文件名
   },
 
@@ -26,10 +26,10 @@ module.exports = {
       //   //   }
       //   // }
       // },
-      // {
-      //   test: /\.html$/,
-      //   loader: 'html-loader',
-      // },
+      {
+        test: /\.html$/,
+        loader: 'html-loader',
+      },
       {
         test: /\.js$/,
         exclude: '/node_modules/',
@@ -65,14 +65,13 @@ module.exports = {
     //   allChunks: true, // 从所有附加块中提取（默认只从初始块提取）
     // }),
   ],
-  // resolve: {
-  //   // require时省略的扩展名，如：require('app') 不需要app.js
-  //   extensions: ['.js', '.vue',],
-  //   // 别名，可以直接使用别名来代表设定的路径以及其他
-  //   // alias: {
-  //   //   filter: path.join(__dirname, './src/filters'),
-  //   //   vue$: 'vue/dist/vue.common.js',
-  //   //   components: path.join(__dirname, './src/components')
-  //   // }
-  // },
+  resolve: {
+    // require时省略的扩展名，如：require('app') 不需要app.js
+    // extensions: ['.js', '.vue',],
+    // 别名，可以直接使用别名来代表设定的路径以及其他
+    alias: {
+      $: './app/js/libs/jquery/jquery-3.1.1.js',
+      jquery: './app/js/libs/jquery/jquery-3.1.1.js',
+    },
+  },
 };

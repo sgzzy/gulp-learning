@@ -1,12 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Gulp Testing</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-    <!--<link rel="stylesheet" href="./css/base.css">-->
-    <!--<link rel="stylesheet" href="./css/index.css">-->
+    <title>JSPractice</title>
+    <link rel="stylesheet" type="text/css" href="../statics/product/css/base/base.css">
+    <link rel="stylesheet" type="text/css" href="../statics/product/css/view/home/index.css">
+    <script type="text/javascript" src="../statics/product/loader/sea.js"></script>
+    <script>
+      (function() {
+        var lastTime = 0;
+        var vendors = ['ms', 'moz', 'webkit', 'o'];
+        for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+          window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+          window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame'];
+        }
+        if (!window.requestAnimationFrame) window.requestAnimationFrame = function(callback, element) {
+          var currTime = new Date().getTime();
+          var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+          var id = window.setTimeout(function() {
+            callback(currTime + timeToCall);
+          }, timeToCall);
+          lastTime = currTime + timeToCall;
+          return id;
+        };
+        if (!window.cancelAnimationFrame) window.cancelAnimationFrame = function(id) {
+          clearTimeout(id);
+        };
+      }());
+    </script>
+    <script type="text/javascript">
+      seajs.config({ base: '../statics/product/js' });
+      seajs.use('../statics/product/js/view/home/index');
+    </script>
   </head>
   <body>
     <div class="demo">
@@ -159,20 +184,5 @@
         </ul>
       </div>
     </div>
-    <script src="./js/views/bundle.js"></script>
   </body>
 </html>
-<!--<div class="slider-box">
-      <div class="slider-content">
-        <ul class="slider-list">
-          <li class="slider-list-item"><img src="./images/banner-01.jpg" /></li>
-          <li class="slider-list-item"><img src="./images/banner-02.jpg" /></li>
-          <li class="slider-list-item"><img src="./images/banner-03.jpg" /></li>
-          <li class="slider-list-item"><img src="./images/banner-04.jpg" /></li>
-          <li class="slider-list-item"><img src="./images/banner-05.jpg" /></li>
-          <li class="slider-list-item"><img src="./images/banner-06.jpg" /></li>
-        </ul>
-      </div>
-      <a class="pre"></a>
-      <a class="next"></a>
-    </div>-->
