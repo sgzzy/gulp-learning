@@ -1,9 +1,11 @@
 import gulp from 'gulp';
 import babel from 'gulp-babel';
 import del from 'del';
+import browser from 'browser-sync';
 // import uglify from 'gulp-uglify';
 import webpack from 'gulp-webpack';
 import myConfig from './webpack.config.js';
+
 gulp.task('clean', function() { // 删除文件
   del(['dist/**/*']); // **/*为通配符
 });
@@ -73,4 +75,12 @@ gulp.task('webpack', ['develop', 'watch-module', 'watch-html'], function() {
     .pipe(webpack(Object.create(myConfig)))
     .pipe(gulp.dest('./dist/js/views/'));
 
+});
+
+gulp.task('browser-sync', function() {
+  browser.init({
+    server: {
+      baseDir: './dist/',
+    }
+  });
 });
