@@ -6,7 +6,7 @@ import browser from 'browser-sync';
 import path from 'path';
 import glob from 'glob';
 // import uglify from 'gulp-uglify';
-import webpack from 'gulp-webpack';
+import webpack from 'webpack-stream';
 import myConfig from './webpack.config.js';
 
 gulp.task('clean', function() { // 删除文件
@@ -45,7 +45,7 @@ gulp.task('html', function() {
     .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('watch', ['webpack'], function() {
+gulp.task('watch', ['webpack', ], function() {
   // 建立浏览器自动刷新服务器
   browser.init({
     server: {
@@ -68,16 +68,14 @@ gulp.task('watch', ['webpack'], function() {
   });
 });
 
-// 用webpack打包js
-gulp.task('webpack', ['js', 'css', 'html'], function() {
-  return gulp.src('./dist/**/*')
-    .pipe(webpack(myConfig))
-    .pipe(gulp.dest('./dist/index/js/'));
-});
-
 // 获取入口js文件路径和文件名
 
-
+/**
+ *
+ *
+ * @param {any} globPath
+ * @returns
+ */
 function getEntry(globPath) {
   const files = glob.sync(globPath);
   let entries = {};
@@ -86,21 +84,48 @@ function getEntry(globPath) {
     const split = filepath.split('/');
     let name = split[split.length - 1];
     name = name.replace('.js', '');
-    guil.log(name);
     entries[name] = './' + filepath;
   });
   return entries;
 }
 
-// 测试用gulp任务
+// 用webpack打包js
+gulp.task('webpack', ['js', 'css', 'html', ], function() {
+  return gulp.src('./dist/**/*')
+    .pipe(webpack({
+      entry: getEntry('./dist/js/views/**/*.js'),
+      output: {
+        path: '/dist/',
+        filename: '[name].js',
+      },
+      module: {
+        rules: [ // 加载器的集合
+          {
+            test: /\.html$/,
+            loader: 'html-loader',
+          },
+          {
+            test: /\.js$/,
+            exclude: '/node_modules/',
+            use: ['babel-loader', 'eslint-loader', ],
+          },
+          {
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader', ], // style为插入html的样式，css为href引入的样式
+          },
+        ],
+      },
 
-gulp.task('test', function() {
-  getEntry('./app/index/**/*.html');
-  guil.log(myConfig.entry);
-
+      devtool: 'source-map',
+    }))
+    .pipe(gulp.dest('./dist/index/js/'));
 });
 
-// { 
+
+// 测试用gulp任务
+
+
+// {
 //       entry: getEntry(),
 //       output: {
 //         path: path.join(__dirname, 'dist/js/index/'),
