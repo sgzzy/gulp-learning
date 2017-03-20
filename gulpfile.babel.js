@@ -7,7 +7,7 @@ import path from 'path';
 import glob from 'glob';
 // import uglify from 'gulp-uglify';
 import webpack from 'webpack-stream';
-import myConfig from './webpack.config.js';
+// import myConfig from 'webpack.config.js';
 
 gulp.task('clean', function() { // 删除文件
   del(['dist/**/*', ]); // **/*为通配符
@@ -17,24 +17,26 @@ gulp.task('clean', function() { // 删除文件
 gulp.task('css', function() {
   const cssPath = './app/css/**/*.css';
   return gulp.src(cssPath, { base: 'app', })
-    .pipe(gulp.dest('./dist/'));
+    .pipe(gulp.dest('dist/'));
 });
 
-// gulp.task('watch-css', ['css',], function() {
-//   const cssPath = './app/css/**/*.css';
-//   return gulp.watch(cssPath, ['css',]);
-// });
+// 处理图片
+gulp.task('images', function() {
+  const imagePath = './app/images/**/*';
+  return gulp.src(imagePath, {base: 'app'})
+    .pipe(gulp.dest('dist/'));
+});
 
 // 处理js文件
 gulp.task('js', function() {
   const jsPath = ['!./app/js/libs/**/*.js', './app/js/**/*.js', ];
   return gulp.src(jsPath, { base: 'app', })
     .pipe(babel())
-    .pipe(gulp.dest('./dist/'));
+    .pipe(gulp.dest('dist/'));
 });
 
 // gulp.task('watch-js', ['js',], function() {
-//   const jsPath = ['!./app/js/libs/**/*.js', './app/js/**/*.js',];
+//   const jsPath = ['!app/js/libs/**/*.js', 'app/js/**/*.js',];
 //   return gulp.watch(jsPath, ['js',]);
 // });
 
@@ -84,13 +86,13 @@ function getEntry(globPath) {
     const split = filepath.split('/');
     let name = split[split.length - 1];
     name = name.replace('.js', '');
-    entries[name] = './' + filepath;
+    entries[name] = '' + filepath;
   });
   return entries;
 }
 
 // 用webpack打包js
-gulp.task('webpack', ['js', 'css', 'html', ], function() {
+gulp.task('webpack', ['js', 'css', 'html', 'images', ], function() {
   return gulp.src('./dist/**/*')
     .pipe(webpack({
       entry: getEntry('./dist/js/views/**/*.js'),
@@ -118,7 +120,7 @@ gulp.task('webpack', ['js', 'css', 'html', ], function() {
 
       devtool: 'source-map',
     }))
-    .pipe(gulp.dest('./dist/index/js/'));
+    .pipe(gulp.dest('dist/index/js/'));
 });
 
 

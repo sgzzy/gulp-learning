@@ -27,3 +27,4 @@
 //   obj.pause();
 //   obj.next();
 // };
+"use strict";
