@@ -4,12 +4,14 @@
 const path = require('path');
 
 module.exports = {
-  entry: './dist/js/views/index.js', // 入口文件
+  entry: {
+   index: './dist/js/views/index.js' 
+  }, // 入口文件
 
-  output: { // 出口配置
-    path: path.join(__dirname, './dist/index/'), // 出口文件的路径
-    filename: '[name].js', // 出口文件的文件名
-  },
+  // output: { // 出口配置
+  //   path: __dirname + '/dist/js/', // 出口文件的路径
+  //   filename: '[name].js', // 出口文件的文件名
+  // },
 
   module: {
     rules: [ // 加载器的集合

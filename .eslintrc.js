@@ -20,12 +20,6 @@ module.exports = {
       "vars": "all",
       "args": "all"
     }],
-    "require-jsdoc": [1, {
-      "require": {
-        "FunctionDeclaration": true,
-        "MethodDefinition": false,
-        "ClassDeclaration": false
-      }
-    }]
+    "require-jsdoc": "off"
   },
 };
