@@ -1,14 +1,14 @@
 // const HtmlWebpackPlugin = require('html-webpack-plugin'); // 自动插入生成html插件
 // const extractTextPlugin = require('extract-text-webpack-plugin'); // 从vue模块中提取css插件
-// const webpack = require('webpack')
+// const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-  entry: './app/js/views/index.js', // 入口文件
+  entry: './dist/js/views/index.js', // 入口文件
 
   output: { // 出口配置
-    path: path.resolve(__dirname, './dist/'), // 出口文件的路径
-    filename: 'bundle.js', // 出口文件的文件名
+    path: path.join(__dirname, './dist/index/'), // 出口文件的路径
+    filename: '[name].js', // 出口文件的文件名
   },
 
   module: {
@@ -33,16 +33,16 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: '/node_modules/',
-        use: ['babel-loader', 'eslint-loader',]
+        use: ['babel-loader', 'eslint-loader', ],
       },
-      // {
-      //   test: /\.css$/,
-      //   loader: extractTextPlugin.extract('css-loader'), // style为插入html的样式，css为href引入的样式
-      // },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader',], // style为插入html的样式，css为href引入的样式
+      },
     ],
   },
 
-  devtool: 'eval-source-map',
+  devtool: 'source-map',
 
   devServer: {
     // 配置监听接口
@@ -57,6 +57,9 @@ module.exports = {
   },
 
   plugins: [
+    // new webpack.ProvidePlugin({
+    //   $: 'jquery',
+    // }),
     // new HtmlWebpackPlugin({
     //   template: './index.html',
     // }),
@@ -64,14 +67,14 @@ module.exports = {
     //   filename: './dist/css/style.css', // 被导出的css文件的路径及名字s
     //   allChunks: true, // 从所有附加块中提取（默认只从初始块提取）
     // }),
+
   ],
   resolve: {
     // require时省略的扩展名，如：require('app') 不需要app.js
     // extensions: ['.js', '.vue',],
     // 别名，可以直接使用别名来代表设定的路径以及其他
-    alias: {
-      $: './app/js/libs/jquery/jquery-3.1.1.js',
-      jquery: './app/js/libs/jquery/jquery-3.1.1.js',
-    },
+    // alias: {
+    //   jquery: 'dist/libs/jquery/jquery-3.1.1.js',
+    // },
   },
 };

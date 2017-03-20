@@ -1,8 +1,17 @@
-/**
- * Created by Administrator on 2016/11/16.
- */
-import Tween from './Tween.js';
-const tween = new Tween();
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.close = exports.open = undefined;
+
+var _Tween = require('./Tween.js');
+
+var _Tween2 = _interopRequireDefault(_Tween);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var tween = new _Tween2.default();
 /**
  *
  *
@@ -13,9 +22,12 @@ const tween = new Tween();
  * @param {any} endtime
  * @param {any} pro
  */
+/**
+ * Created by Administrator on 2016/11/16.
+ */
 function open(target, height, result, endtime, pro) {
-  let timer = null;
-  let startTime;
+  var timer = null;
+  var startTime = void 0;
   /**
    *
    *
@@ -27,7 +39,7 @@ function open(target, height, result, endtime, pro) {
     }
 
     time = parseFloat(time - startTime);
-    let value = Math.floor(tween.Elastic.easeOut(time, height, result, endtime));
+    var value = Math.floor(tween.Elastic.easeOut(time, height, result, endtime));
 
     if (time <= endtime) {
       timer = requestAnimationFrame(start);
@@ -49,10 +61,10 @@ function open(target, height, result, endtime, pro) {
  * @param {any} pro
  */
 function close(target, endtime, pro) {
-  const height = parseInt(target.css(pro));
-  const result = -height;
-  let timer = null;
-  let startTime;
+  var height = parseInt(target.css(pro));
+  var result = -height;
+  var timer = null;
+  var startTime = void 0;
 
   /**
    *
@@ -63,13 +75,13 @@ function close(target, endtime, pro) {
       startTime = time;
     }
     time = parseFloat(time - startTime);
-    let value = Math.floor(tween.Linear(time, height, result, endtime));
+    var value = Math.floor(tween.Linear(time, height, result, endtime));
     if (time < endtime) {
       timer = requestAnimationFrame(end);
     } else {
       value = height + result;
       cancelAnimationFrame(timer);
-      target.parent().attr('class','lesson');
+      target.parent().attr('class', 'lesson');
     }
     target.css(pro, value + 'px');
   }
@@ -77,4 +89,5 @@ function close(target, endtime, pro) {
   requestAnimationFrame(end);
 }
 
-export { open, close, };
+exports.open = open;
+exports.close = close;

@@ -1,16 +1,10 @@
-/**
- * Created by Administrator on 2016/11/14.
- */
-/**
- * Created by Administrator on 2016/11/14.
- */
-import { open, close, } from './../utils/js';
-import $ from './../libs/jquery/jquery-3.1.1.js';
+import { open, close, } from './../utils/motion.js';
+
 const click = $('.lesson');
 const list = $('.list');
 const len = list.length;
 let active = null;
-let timer = null;
+// let timer = null;
 for (let i = 0; i < len; i++) {
   click[i].addEventListener('click', onclick);
 }
@@ -22,9 +16,9 @@ for (let i = 0; i < len; i++) {
  */
 function onclick(e) {
   const oThis = this;
-  let target = oThis.children()[1];
-  const listHeight = $(target.children()[0]).css('height');
-  const length = target.children.length;
+  let target = $($(oThis).children()[1]);
+  const listHeight = parseInt($(target.children()[0]).css('height'));
+  const length = target.children().length;
   const time = 1000;
   const closetime = 500;
   let height,
@@ -39,21 +33,21 @@ function onclick(e) {
       active = null;
     }, closetime);
   } else if (active && active != oThis) {
-    target = $(active).children()[1];
+    target = $($(active).children()[1]);
     close(target, closetime, pro);
     setTimeout(function() {
       active = oThis;
       active.className = 'lesson active';
-      target = $(active).children()[1];
-      height = $(target).css('height');
+      target = $($(active).children()[1]);
+      height = parseInt(target.css('height'));
       result = (listHeight + 1) * length;
       open(target, height, result, time, pro);
     }, closetime);
   } else if (active == null) {
     active = oThis;
     active.className = 'lesson active';
-    target = $(active).children()[1];
-    height = $(target).css('height');
+    target = $($(active).children()[1]);
+    height = parseInt(target.css('height'));
     result = (listHeight + 1) * length;
     open(target, height, result, time, pro);
   }
