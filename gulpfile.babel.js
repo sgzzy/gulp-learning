@@ -5,7 +5,8 @@ import guil from 'gulp-util';
 import browser from 'browser-sync';
 import path from 'path';
 import glob from 'glob';
-// import uglify from 'gulp-uglify';
+import uglify from 'gulp-uglify';
+import rename from 'gulp-rename';
 import webpack from 'webpack-stream';
 import gulpSequence from 'gulp-sequence';
 import myConfig from './webpack.config.js';
@@ -95,6 +96,9 @@ gulp.task('webpack', function() {
   myConfig.entry = getEntry('./dist/js/views/**/*.js');
   return gulp.src('./dist/**/*')
     .pipe(webpack(myConfig))
+    .pipe(gulp.dest('dist/index/js/'))
+    .pipe(uglify())
+    .pipe(rename({extname: '.min.js'}))
     .pipe(gulp.dest('dist/index/js/'));
 });
 
