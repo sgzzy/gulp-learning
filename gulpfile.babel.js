@@ -1,9 +1,9 @@
 import gulp from 'gulp';
 import babel from 'gulp-babel';
 import del from 'del';
-import guil from 'gulp-util';
+// import guil from 'gulp-util'; // 开发时控制台输出用
 import browser from 'browser-sync';
-import path from 'path';
+// import path from 'path';
 import glob from 'glob';
 import uglify from 'gulp-uglify';
 import ignore from 'gulp-ignore';
@@ -12,8 +12,9 @@ import webpack from 'webpack-stream';
 import gulpSequence from 'gulp-sequence';
 import myConfig from './webpack.config.js';
 
+
 gulp.task('clean', function() { // 删除文件
-  del(['dist/**/*', ]); // **/*为通配符
+  del(['dist/**/*', ]); // **/*为通配符（glob语法）
 });
 
 // 处理css文件
@@ -45,6 +46,7 @@ gulp.task('html', function() {
     .pipe(gulp.dest('dist/'));
 });
 
+// 建立热加载的本地服务器
 gulp.task('watch', ['run-webpack', ], function() {
   // 建立浏览器自动刷新服务器
   browser.init({
@@ -108,7 +110,9 @@ gulp.task('webpack', function() {
 // gulp处理文件后打包
 // gulp-sequence让任务顺序执行
 gulp.task('run-webpack',gulpSequence('js', 'css', 'images', 'html', 'webpack'));
-// 测试用gulp任务
+
+
+
 
 // webpack({
 //       entry: getEntry('./dist/js/views/**/*.js'),

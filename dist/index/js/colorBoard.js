@@ -1,41 +1,41 @@
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-
+/******/
 /******/ 		// Check if module is in cache
 /******/ 		if(installedModules[moduleId])
 /******/ 			return installedModules[moduleId].exports;
-
+/******/
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			exports: {},
 /******/ 			id: moduleId,
 /******/ 			loaded: false
 /******/ 		};
-
+/******/
 /******/ 		// Execute the module function
 /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-
+/******/
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
-
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-
-
+/******/
+/******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
-
+/******/
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
-
+/******/
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
-
+/******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
 /******/ })
@@ -45,17 +45,17 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	var _colorBoard = __webpack_require__(1);
-
+	
 	var _colorBoard2 = _interopRequireDefault(_colorBoard);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+	
 	var lightBar = document.getElementById('lightBar'); /**
 	                                                     * Created by Administrator on 2016/12/8.
 	                                                     */
-
+	
 	var lCtx = lightBar.getContext('2d');
 	var rgbColor = document.getElementsByTagName('input');
 	var hexColor = rgbColor[3];
@@ -71,10 +71,10 @@
 	  height: lightBar.height
 	};
 	var lightDraw = new _colorBoard2.default(light); // 初始化明亮条画板
-
+	
 	colorBoard.addEventListener('mousedown', mousedown); // 选取颜色
 	lightBar.addEventListener('click', lightClick); // 选择明亮程度
-
+	
 	/**
 	 *
 	 *
@@ -89,7 +89,7 @@
 	    document.addEventListener('mousemove', mousemove);
 	  });
 	}
-
+	
 	function mousemove(event) {
 	  event = event || window.event;
 	  var target = event.srcElement ? event.srcElement : event.target;
@@ -120,7 +120,7 @@
 	    choose(x, y);
 	  }
 	}
-
+	
 	function lightClick(event) {
 	  event = event || window.event;
 	  var r = Number(rgbColor[0].value);
@@ -138,7 +138,7 @@
 	  hexColor.value = hex.replace('#', '');
 	  colorChoose.style.background = hex;
 	}
-
+	
 	function choose(x, y) {
 	  var hs = toHSV(x, y);
 	  var pixel = lightDraw.hsvToRgb(hs.h, hs.s, 1);
@@ -151,7 +151,7 @@
 	  colorChoose.style.background = hex;
 	  lightDraw.drawLight(hs.h, hs.s);
 	}
-
+	
 	function toHSV(x, y) {
 	  var h = Math.floor(Math.asin(y / Math.sqrt(x * x + y * y)) * 180 / Math.PI);
 	  var s = Math.sqrt(x * x + y * y) * 2 / colorBoard.width;
@@ -166,19 +166,19 @@
 /***/ function(module, exports) {
 
 	'use strict';
-
+	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-
+	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
+	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
+	
 	/**
 	 * Created by Administrator on 2016/12/8.
 	 */
-
+	
 	// 创建画板类
 	var ColorBoard = function () {
 	  /**
@@ -191,15 +191,15 @@
 	    var ctx = _ref.ctx,
 	        width = _ref.width,
 	        height = _ref.height;
-
+	
 	    _classCallCheck(this, ColorBoard);
-
+	
 	    this.ctx = ctx;
 	    this.width = width;
 	    this.height = height;
 	    this.imageData = this.ctx.createImageData(this.width, this.height);
 	  }
-
+	
 	  /**
 	   * setDate 给imageData的元像素上色value为rgba值的数组
 	   * @param imageData image对象
@@ -207,8 +207,8 @@
 	   * @param {Number} y y坐标
 	   * @param {Array} value rgba值
 	   */
-
-
+	
+	
 	  _createClass(ColorBoard, [{
 	    key: 'setData',
 	    value: function setData(imageData, x, y, value) {
@@ -217,12 +217,12 @@
 	      imageData.data[y * (imageData.width * 4) + x * 4 + 2] = value[2];
 	      imageData.data[y * (imageData.width * 4) + x * 4 + 3] = value[3];
 	    }
-
+	
 	    /**
 	     * 给画板按hsv上色
 	     * @param imageDate
 	     */
-
+	
 	  }, {
 	    key: 'drawImage',
 	    value: function drawImage() {
@@ -241,14 +241,14 @@
 	        }
 	      }
 	    }
-
+	
 	    /**
 	     *
 	     * @param r
 	     * @param startAngle
 	     * @param rgb
 	     */
-
+	
 	  }, {
 	    key: 'drawColor',
 	    value: function drawColor(r, startAngle, rgb) {
@@ -262,14 +262,14 @@
 	      ctx.fill();
 	      ctx.closePath();
 	    }
-
+	
 	    /**
 	     *
 	     *
 	     * @param {any} h
 	     * @param {any} s
 	     */
-
+	
 	  }, {
 	    key: 'drawLight',
 	    value: function drawLight(h, s) {
@@ -283,7 +283,7 @@
 	      }
 	      context.ctx.putImageData(imageData, 0, 0);
 	    }
-
+	
 	    /**
 	     * HSVToRGB
 	     * @param h
@@ -291,7 +291,7 @@
 	     * @param v
 	     * @returns {*}
 	     */
-
+	
 	  }, {
 	    key: 'hsvToRgb',
 	    value: function hsvToRgb(h, s, v) {
@@ -350,13 +350,13 @@
 	        b: b * 255
 	      };
 	    }
-
+	
 	    /**
 	     * colorHex
 	     * @param rgb
 	     * @returns {string}
 	     */
-
+	
 	  }, {
 	    key: 'colorHex',
 	    value: function colorHex(rgb) {
@@ -384,13 +384,13 @@
 	        }
 	      }
 	    }
-
+	
 	    /**
 	     * colorRgb
 	     * @param hex
 	     * @returns {string}
 	     */
-
+	
 	  }, {
 	    key: 'colorRgb',
 	    value: function colorRgb(hex) {
@@ -416,7 +416,7 @@
 	        throw new Error('The colorHex\'s  format is warn.');
 	      }
 	    }
-
+	
 	    /**
 	     *
 	     * @param r
@@ -424,7 +424,7 @@
 	     * @param b
 	     * @returns {{h: *, s: *, v: (number|*)}}
 	     */
-
+	
 	  }, {
 	    key: 'rgbToHsv',
 	    value: function rgbToHsv(r, g, b) {
@@ -463,11 +463,12 @@
 	      };
 	    }
 	  }]);
-
+	
 	  return ColorBoard;
 	}();
-
+	
 	exports.default = ColorBoard;
 
 /***/ }
 /******/ ]);
+//# sourceMappingURL=colorBoard.js.map

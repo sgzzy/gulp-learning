@@ -46,19 +46,19 @@ module.exports = {
     ],
   },
 
-  // devtool: 'eval-source-map',
+  devtool: 'source-map',
 
-  devServer: {
-    // 配置监听接口
-    port: 8080,
+  // devServer: {
+  //   // 配置监听接口
+  //   port: 8080,
 
-    // historyApiFallback用来配置页面重定向
-    historyApiFallback: true,
+  //   // historyApiFallback用来配置页面重定向
+  //   historyApiFallback: true,
 
-    inline: true,
+  //   inline: true,
 
-    hot: true,
-  },
+  //   hot: true,
+  // },
 
   plugins: [
     // new webpack.ProvidePlugin({
