@@ -103,6 +103,7 @@ gulp.task('webpack', function() {
 });
 
 // gulp处理文件后打包
+// gulp-sequence让任务顺序执行
 gulp.task('run-webpack',gulpSequence('js', 'css', 'images', 'html', 'webpack'));
 // 测试用gulp任务
 
