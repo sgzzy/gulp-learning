@@ -6,6 +6,7 @@ import browser from 'browser-sync';
 import path from 'path';
 import glob from 'glob';
 import uglify from 'gulp-uglify';
+import ignore from 'gulp-ignore';
 import rename from 'gulp-rename';
 import webpack from 'webpack-stream';
 import gulpSequence from 'gulp-sequence';
@@ -94,9 +95,11 @@ function getEntry(globPath) {
 // 用webpack打包js
 gulp.task('webpack', function() {
   myConfig.entry = getEntry('./dist/js/views/**/*.js');
-  return gulp.src('./dist/**/*')
+
+  return gulp.src('./dist/js/**/*.js')
     .pipe(webpack(myConfig))
     .pipe(gulp.dest('dist/index/js/'))
+    .pipe(ignore.exclude('**/*.map'))
     .pipe(uglify())
     .pipe(rename({extname: '.min.js'}))
     .pipe(gulp.dest('dist/index/js/'));

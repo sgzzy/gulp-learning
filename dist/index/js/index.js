@@ -1,41 +1,41 @@
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-/******/
+
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-/******/
+
 /******/ 		// Check if module is in cache
 /******/ 		if(installedModules[moduleId])
 /******/ 			return installedModules[moduleId].exports;
-/******/
+
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			exports: {},
 /******/ 			id: moduleId,
 /******/ 			loaded: false
 /******/ 		};
-/******/
+
 /******/ 		// Execute the module function
 /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
+
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
-/******/
+
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/
-/******/
+
+
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
-/******/
+
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
-/******/
+
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
-/******/
+
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
 /******/ })
@@ -45,9 +45,9 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	
+
 	var _motion = __webpack_require__(2);
-	
+
 	var click = $('.lesson');
 	var list = $('.list');
 	var len = list.length;
@@ -56,7 +56,7 @@
 	for (var i = 0; i < len; i++) {
 	  click[i].addEventListener('click', onclick);
 	}
-	
+
 	/**
 	 *
 	 * @param {any} event
@@ -107,18 +107,18 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	
+
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
 	exports.close = exports.open = undefined;
-	
+
 	var _Tween = __webpack_require__(3);
-	
+
 	var _Tween2 = _interopRequireDefault(_Tween);
-	
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
+
 	var tween = new _Tween2.default();
 	/**
 	 *
@@ -145,10 +145,10 @@
 	    if (timer === null) {
 	      startTime = time;
 	    }
-	
+
 	    time = parseFloat(time - startTime);
 	    var value = Math.floor(tween.Elastic.easeOut(time, height, result, endtime));
-	
+
 	    if (time <= endtime) {
 	      timer = requestAnimationFrame(start);
 	    } else if (time > endtime) {
@@ -157,7 +157,7 @@
 	    }
 	    target.css(pro, value + 'px');
 	  }
-	
+
 	  requestAnimationFrame(start);
 	}
 	/**
@@ -173,7 +173,7 @@
 	  var result = -height;
 	  var timer = null;
 	  var startTime = void 0;
-	
+
 	  /**
 	   *
 	   * @param {any} time
@@ -193,10 +193,10 @@
 	    }
 	    target.css(pro, value + 'px');
 	  }
-	
+
 	  requestAnimationFrame(end);
 	}
-	
+
 	exports.open = open;
 	exports.close = close;
 
@@ -205,20 +205,20 @@
 /***/ function(module, exports) {
 
 	"use strict";
-	
+
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
+
 	var Quad = function () {
 	  function Quad() {
 	    _classCallCheck(this, Quad);
 	  }
-	
+
 	  _createClass(Quad, [{
 	    key: "easeIn",
 	    value: function easeIn(t, b, c, d) {
@@ -236,15 +236,15 @@
 	      return -c / 2 * (--t * (t - 2) - 1) + b;
 	    }
 	  }]);
-	
+
 	  return Quad;
 	}();
-	
+
 	var Cubic = function () {
 	  function Cubic() {
 	    _classCallCheck(this, Cubic);
 	  }
-	
+
 	  _createClass(Cubic, [{
 	    key: "easeIn",
 	    value: function easeIn(t, b, c, d) {
@@ -262,15 +262,15 @@
 	      return c / 2 * ((t -= 2) * t * t + 2) + b;
 	    }
 	  }]);
-	
+
 	  return Cubic;
 	}();
-	
+
 	var Quart = function () {
 	  function Quart() {
 	    _classCallCheck(this, Quart);
 	  }
-	
+
 	  _createClass(Quart, [{
 	    key: "easeIn",
 	    value: function easeIn(t, b, c, d) {
@@ -288,15 +288,15 @@
 	      return -c / 2 * ((t -= 2) * t * t * t - 2) + b;
 	    }
 	  }]);
-	
+
 	  return Quart;
 	}();
-	
+
 	var Quint = function () {
 	  function Quint() {
 	    _classCallCheck(this, Quint);
 	  }
-	
+
 	  _createClass(Quint, [{
 	    key: "easeIn",
 	    value: function easeIn(t, b, c, d) {
@@ -314,15 +314,15 @@
 	      return c / 2 * ((t -= 2) * t * t * t * t + 2) + b;
 	    }
 	  }]);
-	
+
 	  return Quint;
 	}();
-	
+
 	var Sine = function () {
 	  function Sine() {
 	    _classCallCheck(this, Sine);
 	  }
-	
+
 	  _createClass(Sine, [{
 	    key: "easeIn",
 	    value: function easeIn(t, b, c, d) {
@@ -339,15 +339,15 @@
 	      return -c / 2 * (Math.cos(Math.PI * t / d) - 1) + b;
 	    }
 	  }]);
-	
+
 	  return Sine;
 	}();
-	
+
 	var Expo = function () {
 	  function Expo() {
 	    _classCallCheck(this, Expo);
 	  }
-	
+
 	  _createClass(Expo, [{
 	    key: "easeIn",
 	    value: function easeIn(t, b, c, d) {
@@ -367,15 +367,15 @@
 	      return c / 2 * (-Math.pow(2, -10 * --t) + 2) + b;
 	    }
 	  }]);
-	
+
 	  return Expo;
 	}();
-	
+
 	var Circ = function () {
 	  function Circ() {
 	    _classCallCheck(this, Circ);
 	  }
-	
+
 	  _createClass(Circ, [{
 	    key: "easeIn",
 	    value: function easeIn(t, b, c, d) {
@@ -393,15 +393,15 @@
 	      return c / 2 * (Math.sqrt(1 - (t -= 2) * t) + 1) + b;
 	    }
 	  }]);
-	
+
 	  return Circ;
 	}();
-	
+
 	var Elastic = function () {
 	  function Elastic() {
 	    _classCallCheck(this, Elastic);
 	  }
-	
+
 	  _createClass(Elastic, [{
 	    key: "easeIn",
 	    value: function easeIn(t, b, c, d, a, p) {
@@ -443,15 +443,15 @@
 	      return a * Math.pow(2, -10 * (t -= 1)) * Math.sin((t * d - s) * (2 * Math.PI) / p) * .5 + c + b;
 	    }
 	  }]);
-	
+
 	  return Elastic;
 	}();
-	
+
 	var Back = function () {
 	  function Back() {
 	    _classCallCheck(this, Back);
 	  }
-	
+
 	  _createClass(Back, [{
 	    key: "easeIn",
 	    value: function easeIn(t, b, c, d, s) {
@@ -472,15 +472,15 @@
 	      return c / 2 * ((t -= 2) * t * (((s *= 1.525) + 1) * t + s) + 2) + b;
 	    }
 	  }]);
-	
+
 	  return Back;
 	}();
-	
+
 	var Bounce = function () {
 	  function Bounce() {
 	    _classCallCheck(this, Bounce);
 	  }
-	
+
 	  _createClass(Bounce, [{
 	    key: "easeIn",
 	    value: function easeIn(t, b, c, d) {
@@ -505,10 +505,10 @@
 	      if (t < d / 2) return Bounce.easeIn(t * 2, 0, c, d) * .5 + b;else return Bounce.easeOut(t * 2 - d, 0, c, d) * .5 + c * .5 + b;
 	    }
 	  }]);
-	
+
 	  return Bounce;
 	}();
-	
+
 	var Tween = function () {
 	  _createClass(Tween, [{
 	    key: "Linear",
@@ -516,10 +516,10 @@
 	      return c * t / d + b;
 	    }
 	  }]);
-	
+
 	  function Tween() {
 	    _classCallCheck(this, Tween);
-	
+
 	    this.Back = new Back();
 	    this.Bounce = new Bounce();
 	    this.Circ = new Circ();
@@ -531,12 +531,11 @@
 	    this.Quint = new Quint();
 	    this.Sine = new Sine();
 	  }
-	
+
 	  return Tween;
 	}();
-	
+
 	exports.default = Tween;
 
 /***/ }
 /******/ ]);
-//# sourceMappingURL=index.js.map
