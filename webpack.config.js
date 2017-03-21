@@ -1,7 +1,9 @@
 // const HtmlWebpackPlugin = require('html-webpack-plugin'); // 自动插入生成html插件
 // const extractTextPlugin = require('extract-text-webpack-plugin'); // 从vue模块中提取css插件
 // const webpack = require('webpack');
-const path = require('path');
+import path from 'path';
+import glob from 'glob';
+// import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 module.exports = {
   // entry: {

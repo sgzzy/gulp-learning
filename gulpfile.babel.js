@@ -7,7 +7,8 @@ import path from 'path';
 import glob from 'glob';
 // import uglify from 'gulp-uglify';
 import webpack from 'webpack-stream';
-// import myConfig from 'webpack.config.js';
+import gulpSequence from 'gulp-sequence';
+import myConfig from './webpack.config.js';
 
 gulp.task('clean', function() { // 删除文件
   del(['dist/**/*', ]); // **/*为通配符
@@ -23,7 +24,7 @@ gulp.task('css', function() {
 // 处理图片
 gulp.task('images', function() {
   const imagePath = './app/images/**/*';
-  return gulp.src(imagePath, {base: 'app'})
+  return gulp.src(imagePath, { base: 'app' })
     .pipe(gulp.dest('dist/'));
 });
 
@@ -35,11 +36,6 @@ gulp.task('js', function() {
     .pipe(gulp.dest('dist/'));
 });
 
-// gulp.task('watch-js', ['js',], function() {
-//   const jsPath = ['!app/js/libs/**/*.js', 'app/js/**/*.js',];
-//   return gulp.watch(jsPath, ['js',]);
-// });
-
 // 处理html文件
 gulp.task('html', function() {
   const htmlPath = './app/**/*.html';
@@ -47,7 +43,7 @@ gulp.task('html', function() {
     .pipe(gulp.dest('dist/'));
 });
 
-gulp.task('watch', ['webpack', ], function() {
+gulp.task('watch', ['run-webpack', ], function() {
   // 建立浏览器自动刷新服务器
   browser.init({
     server: {
@@ -64,6 +60,9 @@ gulp.task('watch', ['webpack', ], function() {
     }
     if (/\.html$/.test(event.path)) {
       gulp.run('html');
+    }
+    if (/images/.test(event.path)) {
+      gulp.run('images');
     }
     gulp.run('webpack');
     browser.reload();
@@ -92,49 +91,29 @@ function getEntry(globPath) {
 }
 
 // 用webpack打包js
-gulp.task('webpack', ['js', 'css', 'html', 'images', ], function() {
+gulp.task('webpack', function() {
+  myConfig.entry = getEntry('./dist/js/views/**/*.js');
   return gulp.src('./dist/**/*')
-    .pipe(webpack({
-      entry: getEntry('./dist/js/views/**/*.js'),
-      output: {
-        path: '/dist/',
-        filename: '[name].js',
-      },
-      module: {
-        rules: [ // 加载器的集合
-          {
-            test: /\.html$/,
-            loader: 'html-loader',
-          },
-          {
-            test: /\.js$/,
-            exclude: '/node_modules/',
-            use: ['babel-loader', 'eslint-loader', ],
-          },
-          {
-            test: /\.css$/,
-            use: ['style-loader', 'css-loader', ], // style为插入html的样式，css为href引入的样式
-          },
-        ],
-      },
-
-      devtool: 'source-map',
-    }))
+    .pipe(webpack(myConfig))
     .pipe(gulp.dest('dist/index/js/'));
 });
 
-
+// gulp处理文件后打包
+gulp.task('run-webpack',gulpSequence('js', 'css', 'images', 'html', 'webpack'));
 // 测试用gulp任务
 
-
-// {
-//       entry: getEntry(),
+// webpack({
+//       entry: getEntry('./dist/js/views/**/*.js'),
 //       output: {
-//         path: path.join(__dirname, 'dist/js/index/'),
-//         filename: '[name].js'
+//         path: '/dist/',
+//         filename: '[name].js',
 //       },
 //       module: {
 //         rules: [ // 加载器的集合
+//           {
+//             test: /\.html$/,
+//             loader: 'html-loader',
+//           },
 //           {
 //             test: /\.js$/,
 //             exclude: '/node_modules/',
@@ -148,5 +127,6 @@ gulp.task('webpack', ['js', 'css', 'html', 'images', ], function() {
 //       },
 
 //       devtool: 'source-map',
-
-//     }
+//     }))
+//
+// }

@@ -33,6 +33,7 @@
     "gulp-concat": "^2.6.1",
     "gulp-eslint": "^3.0.1",
     "gulp-rename": "^1.2.2",
+    "gulp-sequence": "^0.4.6",
     "gulp-sourcemaps": "^2.4.1",
     "gulp-uglify": "^2.0.1",
     "gulp-util": "^3.0.8",
