@@ -111,9 +111,6 @@ gulp.task('webpack', function() {
 // gulp-sequence让任务顺序执行
 gulp.task('run-webpack',gulpSequence('js', 'css', 'images', 'html', 'webpack'));
 
-
-
-
 // webpack({
 //       entry: getEntry('./dist/js/views/**/*.js'),
 //       output: {
