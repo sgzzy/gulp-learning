@@ -3,13 +3,9 @@
   <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="../statics/product/css/base/base.css">
-    <link rel="stylesheet" href="../statics/product/css/view/other/colorBoard.css">
-    <script type="text/javascript" src="../statics/product/loader/sea.js"></script>
-    <script type="text/javascript">
-      seajs.config({ base: '../statics/product/js' });
-      seajs.use('../statics/product/js/view/other/colorBoard');
-    </script>
+    <link rel="stylesheet" type="text/css" href="../css/base.css">
+    <link rel="stylesheet" href="../css/colorBoard.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
   </head>
   <body>
     <div class="color-board">
@@ -26,7 +22,7 @@
 
       </div>
       <div id="colorBoard">
-        <img ondragstart="return false;" style="user-select: none;" src="../statics/product/images/colorBoard/HSColor360.png" width="360" height="360" draggable="false">
+        <img ondragstart="return false;" style="user-select: none;" src="../images/colorBoard/HSColor360.png" width="360" height="360" draggable="false">
         <div class="colorBox"></div>
       </div>
       <canvas id="lightBar" width="40" height="360" style="user-select: none;"></canvas>
@@ -35,5 +31,6 @@
       <input class="rgb-color" type="text" placeholder="RGB(255,255,255)">
       <input class="hex-color" type="text" placeholder="#ffffff">
     </div>
+    <script src="./js/colorBoard.js"></script>
   </body>
 </html>

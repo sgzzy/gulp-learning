@@ -126,7 +126,7 @@
 	  var r = Number(rgbColor[0].value);
 	  var g = Number(rgbColor[1].value);
 	  var b = Number(rgbColor[2].value);
-	  var hsv = lightDraw.rgbToHsv(r, g, b);
+	  var hsv = lightDraw.hsvToRgb(r, g, b);
 	  var y = event.offsetY;
 	  hsv.v = parseFloat(360 - y) / 360;
 	  var pixel = lightDraw.hsvToRgb(hsv.h, hsv.s, hsv.v);
@@ -201,11 +201,11 @@
 	  }
 	
 	  /**
-	   * setDate
-	   * @param imageData
-	   * @param {Number} x
-	   * @param {Number} y
-	   * @param {Array} value
+	   * setDate 给imageData的元像素上色value为rgba值的数组
+	   * @param imageData image对象
+	   * @param {Number} x x坐标
+	   * @param {Number} y y坐标
+	   * @param {Array} value rgba值
 	   */
 	
 	
@@ -219,13 +219,13 @@
 	    }
 	
 	    /**
-	     *
+	     * 给画板按hsv上色
 	     * @param imageDate
 	     */
 	
 	  }, {
-	    key: 'drawImageconst',
-	    value: function drawImageconst() {
+	    key: 'drawImage',
+	    value: function drawImage() {
 	      var context = this;
 	      var radius = context.width / 200;
 	      var angle = -Math.PI / 180;
@@ -250,8 +250,8 @@
 	     */
 	
 	  }, {
-	    key: 'drawColorconst',
-	    value: function drawColorconst(r, startAngle, rgb) {
+	    key: 'drawColor',
+	    value: function drawColor(r, startAngle, rgb) {
 	      var context = this;
 	      var ctx = context.ctx;
 	      var radius = context.width / 2;
@@ -271,8 +271,8 @@
 	     */
 	
 	  }, {
-	    key: 'drawLightconst',
-	    value: function drawLightconst(h, s) {
+	    key: 'drawLight',
+	    value: function drawLight(h, s) {
 	      var context = this;
 	      var imageData = context.imageData;
 	      for (var i = 0; i < 360; i++) {
@@ -293,8 +293,8 @@
 	     */
 	
 	  }, {
-	    key: 'hsvToRgbconst',
-	    value: function hsvToRgbconst(h, s, v) {
+	    key: 'hsvToRgb',
+	    value: function hsvToRgb(h, s, v) {
 	      var r = void 0,
 	          g = void 0,
 	          b = void 0;
@@ -358,8 +358,8 @@
 	     */
 	
 	  }, {
-	    key: 'colorHexconst',
-	    value: function colorHexconst(rgb) {
+	    key: 'colorHex',
+	    value: function colorHex(rgb) {
 	      var that = rgb;
 	      var regR = /^(rgb|RGB)/;
 	      var regI = /(?:\(|\)|rgb|RGB)*/g;
@@ -392,8 +392,8 @@
 	     */
 	
 	  }, {
-	    key: 'colorRgbconst',
-	    value: function colorRgbconst(hex) {
+	    key: 'colorRgb',
+	    value: function colorRgb(hex) {
 	      var that = hex.toLowerCase();
 	      var reg = /^#([0-9a-f]{3}|[0-9a-f]{6})$/;
 	      var rgb = 'RGB(';
@@ -426,8 +426,8 @@
 	     */
 	
 	  }, {
-	    key: 'rgbToHsvconst',
-	    value: function rgbToHsvconst(r, g, b) {
+	    key: 'rgbToHsv',
+	    value: function rgbToHsv(r, g, b) {
 	      r = parseFloat(r + 1) / 256;
 	      g = parseFloat(g + 1) / 256;
 	      b = parseFloat(b + 1) / 256;

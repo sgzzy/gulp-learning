@@ -18,11 +18,11 @@ export default class ColorBoard {
   }
 
   /**
-   * setDate
-   * @param imageData
-   * @param {Number} x
-   * @param {Number} y
-   * @param {Array} value
+   * setDate 给imageData的元像素上色value为rgba值的数组
+   * @param imageData image对象
+   * @param {Number} x x坐标
+   * @param {Number} y y坐标
+   * @param {Array} value rgba值
    */
   setData(imageData, x, y, value) {
     imageData.data[(y * (imageData.width * 4) + (x * 4)) + 0] = value[0];
@@ -32,10 +32,10 @@ export default class ColorBoard {
   }
 
   /**
-   *
+   * 给画板按hsv上色
    * @param imageDate
    */
-  drawImageconst() {
+  drawImage() {
     const context = this;
     const radius = context.width / 200;
     const angle = -Math.PI / 180;
@@ -58,7 +58,7 @@ export default class ColorBoard {
    * @param startAngle
    * @param rgb
    */
-  drawColorconst(r, startAngle, rgb) {
+  drawColor(r, startAngle, rgb) {
     const context = this;
     const ctx = context.ctx;
     const radius = context.width / 2;
@@ -76,7 +76,7 @@ export default class ColorBoard {
    * @param {any} h
    * @param {any} s
    */
-  drawLightconst(h, s) {
+  drawLight(h, s) {
     const context = this;
     const imageData = context.imageData;
     for (let i = 0; i < 360; i++) {
@@ -100,7 +100,7 @@ export default class ColorBoard {
    * @param v
    * @returns {*}
    */
-  hsvToRgbconst(h, s, v) {
+  hsvToRgb(h, s, v) {
     let r, g, b;
     if (s == 0) {
       v = Math.floor(v * 255);
@@ -160,7 +160,7 @@ export default class ColorBoard {
    * @param rgb
    * @returns {string}
    */
-  colorHexconst(rgb) {
+  colorHex(rgb) {
     const that = rgb;
     const regR = /^(rgb|RGB)/;
     const regI = /(?:\(|\)|rgb|RGB)*/g;
@@ -190,7 +190,7 @@ export default class ColorBoard {
    * @param hex
    * @returns {string}
    */
-  colorRgbconst(hex) {
+  colorRgb(hex) {
     const that = hex.toLowerCase();
     const reg = /^#([0-9a-f]{3}|[0-9a-f]{6})$/;
     let rgb = 'RGB(';
@@ -221,7 +221,7 @@ export default class ColorBoard {
    * @param b
    * @returns {{h: *, s: *, v: (number|*)}}
    */
-  rgbToHsvconst(r, g, b) {
+  rgbToHsv(r, g, b) {
     r = parseFloat(r + 1) / 256;
     g = parseFloat(g + 1) / 256;
     b = parseFloat(b + 1) / 256;

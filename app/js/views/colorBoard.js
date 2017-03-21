@@ -72,7 +72,7 @@ function lightClick(event){
   const r = Number(rgbColor[0].value);
   const g = Number(rgbColor[1].value);
   const b = Number(rgbColor[2].value);
-  const hsv = lightDraw.rgbToHsv(r, g, b);
+  const hsv = lightDraw.hsvToRgb(r, g, b);
   const y = event.offsetY;
   hsv.v = parseFloat(360 - y) / 360;
   const pixel = lightDraw.hsvToRgb(hsv.h, hsv.s, hsv.v);
